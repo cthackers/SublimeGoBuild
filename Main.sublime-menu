@@ -1,0 +1,17 @@
+[
+	{
+		"caption": "Project",
+		"id": "project",
+		"children":
+		[
+			{
+				"caption": "Create GO Project",
+				"id": "new-project",
+				"command": "new_go", 
+		   		"args": { 
+		            "type": "BUILD"
+		         } 
+			}
+		]
+	}
+]
