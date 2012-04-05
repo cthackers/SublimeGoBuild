@@ -62,23 +62,24 @@ class GoBuildCommand(sublime_plugin.WindowCommand):
 		self.GOPATH = ""
 
 	def executeFile(self):
-		self.output_view = self.window.get_output_panel("exec")
- 		self.window.get_output_panel("exec")
- 		self.window.run_command("show_panel", {"panel": "output.exec"})
- 		import subprocess as sub
-
 		if self.type == "RUN":
-			p = sub.Popen("go run " + self.file_name,stdout=sub.PIPE,stderr=sub.PIPE)
+			command = "go run " + self.file_name
 		elif self.type == "BUILD":
-			p = sub.Popen("go build -x -v " + self.file_name + " -o bin\\" + os.basename(self.file_name),stdout=sub.PIPE,stderr=sub.PIPE)
+			command = "go build -x -v " + self.file_name
 		elif self.type == "TEST":
-			p = sub.Popen("go test " + self.file_name,stdout=sub.PIPE,stderr=sub.PIPE)
+			command = "go test " + self.file_name
 		else:
 			self.errorMessage("Unknown command: " + self.type)
+			self.restoreEnv()
+			return
 
-		output, errors = p.communicate()
-		self.append_data(None, output)
-		self.append_data(None, errors)
+		getView().window().run_command("exec", { 'kill': True })
+		getView().window().run_command("exec", {
+			'shell': True,
+			'cmd': [command],
+			'working_dir' : os.path.dirname(file_name),
+			'file_regex': '^(.+\.go):([0-9]+):(?:([0-9]+):)?\s*(.*)',
+		})
 
 	def executeProject(self):
 		self.project_name, self.project_path = getProject()
