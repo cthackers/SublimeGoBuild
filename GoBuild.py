@@ -93,16 +93,23 @@ class GoBuildCommand(sublime_plugin.WindowCommand):
 		sublime.status_message("Building project: " + project_name)
 
 		self.setEnv()
+		main = self.getMainFile()
+
+		if len(main):
+			target = main
+		else:
+			target = self.file_name.replace(os.path.dirname(self.project_path) + "\\", "") 
+
 
 		if self.type == "RUN":
-			command = "go run " + self.file_name.replace(os.path.dirname(self.project_path) + "\\", "")
+			command = "go run " + target
 		elif self.type == "BUILD":
 			if (hasValidStructure(base_path)):
 				if sublime.arch() == "x64":
 					output = "bin\\windows_amd64\\" + project_name + ".exe"
 				else:
 					output = "bin\\windows_386\\" + project_name + ".exe"
-			command = "go build -x -v" + " -o " + output + " " + self.file_name.replace(os.path.dirname(self.project_path) + "\\", "")
+			command = "go build -x -v" + " -o " + output + " " + target
 		elif self.type == "TEST":
 			command = "go test " + self.file_name
 		else:
@@ -123,8 +130,21 @@ class GoBuildCommand(sublime_plugin.WindowCommand):
 	def getProjectName(self):
 		infile = open(self.project_path, "r")
 		project = json.loads(infile.read())
-		name = project["settings"]["name"]
+		if "name" in project["settings"]:
+			name = project["settings"]["name"]
+		else: 
+			name = ""
 		infile.close()
 		return name
+
+	def getMainFile(self):
+		infile = open(self.project_path, "r")
+		project = json.loads(infile.read())
+		if "main" in project["settings"]:
+			main = project["settings"]["main"]
+		else:
+			main = ""
+		infile.close()
+		return main
 
 	
