@@ -22,6 +22,19 @@ Create and save a new Sublime Text project, then from the Project menu bar selec
 It will ask you to give the project a name. This name will be used as your executable output name.
 If your project doesn't have the usual structure it will be created. All code should go in the `src` folder
 
+You can edit the project file (.sublime-project) and add a new key at the settings called `main` 
+
+```
+	"settings": {
+        "go_project": true, 
+        "name": "HelloW",
+        "main" : "src\\main.go"
+    }
+```
+
+If the project file contains the main setting, then wherever you are in a project, pressing `F5` or `F7` 
+will run or build the main file indicated by the setting
+
 Use:<br>
 	* `F5` to run your project<br>
 	* `F7` to build<br>
