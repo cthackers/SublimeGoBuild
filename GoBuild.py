@@ -19,7 +19,7 @@ class GoBuildCommand(sublime_plugin.WindowCommand):
 		if isGoProject():
 			self.executeProject()
 		else:
-			if isGoFile():
+			if isGoFile(self.file_name):
 				self.executeFile()
 			else:
 				sublime.status_message("Cannot " + type.lower() + " a non go file")
@@ -77,7 +77,7 @@ class GoBuildCommand(sublime_plugin.WindowCommand):
 		getView().window().run_command("exec", {
 			'shell': True,
 			'cmd': [command],
-			'working_dir' : os.path.dirname(file_name),
+			'working_dir' : os.path.dirname(self.file_name),
 			'file_regex': '^(.+\.go):([0-9]+):(?:([0-9]+):)?\s*(.*)',
 		})
 
