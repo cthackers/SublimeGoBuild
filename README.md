@@ -6,17 +6,17 @@ This is a little plugin I've built for myself to help me working with Sublime Te
 ## How to install
 
 <b>Normal Instalation</b><br>
-Download the [package](https://github.com/cthackers/SublimeGoBuild/zipball/master)<br>
-For Windows:<br>
-Go to `%APPDATA%\Sublime Text 2\Packages` and extract the archive in a new folder
-For Linux:<br>
+Download the [package](https://github.com/cthackers/SublimeGoBuild/zipball/master)<br><br>
+* For Windows:<br>
+Go to `%APPDATA%\Sublime Text 2\Packages` and extract the archive in a new folder<br>
+* For Linux:<br>
 Go to `~/.config/Sublime Text 2/Packages` and extract the archive in a new folder
 
 <b>Install using git</b><br>
-For Windows:<br>
-Open a `cmd`, go to `%APPDATA%\Sublime Text 2\Packages` and type...
-For Linux:<br>
-Open a shell, go to `~/.config/Sublime Text 2/Packages` and type...
+* For Windows:<br>
+Open a `cmd`, go to `%APPDATA%\Sublime Text 2\Packages` and type...<br>
+* For Linux:<br>
+Open a shell, go to `~/.config/Sublime Text 2/Packages` and type...<br>
 <br>
 `git clone git://github.com/cthackers/SublimeGoBuild.git`
 
