@@ -2,7 +2,6 @@
 
 This is a little plugin I've built for myself to help me working with Sublime Text 2 on GO projects. 
 
-Note that this is build especially for Windows users
 
 ## How to install
 
