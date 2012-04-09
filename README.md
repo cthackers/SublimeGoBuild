@@ -7,10 +7,17 @@ This is a little plugin I've built for myself to help me working with Sublime Te
 
 <b>Normal Instalation</b><br>
 Download the [package](https://github.com/cthackers/SublimeGoBuild/zipball/master)<br>
+For Windows:<br>
 Go to `%APPDATA%\Sublime Text 2\Packages` and extract the archive in a new folder
+For Linux:<br>
+Go to `~/.config/Sublime Text 2/Packages` and extract the archive in a new folder
 
 <b>Install using git</b><br>
-Open up a `cmd`, go to `%APPDATA%\Sublime Text 2\Packages` and type<br>
+For Windows:<br>
+Open a `cmd`, go to `%APPDATA%\Sublime Text 2\Packages` and type...
+For Linux:<br>
+Open a shell, go to `~/.config/Sublime Text 2/Packages` and type...
+<br>
 `git clone git://github.com/cthackers/SublimeGoBuild.git`
 
 <b>Install using Sublime Package Control</b><br>
@@ -27,7 +34,7 @@ You can edit the project file (.sublime-project) and add a new key at the settin
 	"settings": {
         "go_project": true, 
         "name": "HelloW",
-        "main" : "src\\main.go"
+        "main" : "src/main.go"
     }
 ```
 
