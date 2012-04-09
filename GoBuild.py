@@ -24,27 +24,6 @@ class GoBuildCommand(sublime_plugin.WindowCommand):
 			else:
 				sublime.status_message("Cannot " + type.lower() + " a non go file")
 
-	def append_data(self, proc, data):
-	
-		try:
-			str = data.decode("utf8")
-		except:
-			str = "[Decode error - output not utf8]"
-		
-
-		# Normalize newlines, Sublime Text always uses a single \n separator
-		# in memory.
-		str = str.replace('\r\n', '\n').replace('\r', '\n')
-
-		selection_was_at_end = (len(self.output_view.sel()) == 1 and self.output_view.sel()[0] == sublime.Region(self.output_view.size()))
-		self.output_view.set_read_only(False)
-		edit = self.output_view.begin_edit()
-		self.output_view.insert(edit, self.output_view.size(), str)
-		if selection_was_at_end:
-			self.output_view.show(self.output_view.size())
-		self.output_view.end_edit(edit)
-		self.output_view.set_read_only(True)
-
 	def setEnv(self):
 		append = ""
 		if "GOPATH" in os.environ:
@@ -105,11 +84,11 @@ class GoBuildCommand(sublime_plugin.WindowCommand):
 			command = "go run " + target
 		elif self.type == "BUILD":
 			if (hasValidStructure(base_path)):
-				if sublime.arch() == "x64":
-					output = "bin\\windows_amd64\\" + project_name + ".exe"
-				else:
-					output = "bin\\windows_386\\" + project_name + ".exe"
-			command = "go build -x -v" + " -o " + output + " " + target
+				output = os.path.join("bin", getArch(), project_name + ".exe")
+				command = "go build -x -v" + " -o " + output + " " + target
+			else:
+				command = "go build -x -v " + target
+
 		elif self.type == "TEST":
 			command = "go test " + self.file_name
 		else:

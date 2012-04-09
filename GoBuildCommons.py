@@ -22,12 +22,20 @@ def createValidStructure(project_path):
 	if not os.path.exists(os.path.join(project_path, "bin")):
 		os.mkdir(os.path.join(project_path, "bin"))
 
-	if sublime.arch() == "x64":
-		os.mkdir(os.path.join(project_path, "pkg", "windows_amd64"))
-		os.mkdir(os.path.join(project_path, "bin", "windows_amd64"))
-	else:
-		os.mkdir(os.path.join(project_path, "pkg", "windows_386"))
-		os.mkdir(os.path.join(project_path, "bin", "windows_386"))
+	os.mkdir(os.path.join(project_path, "pkg", getArch()))
+	os.mkdir(os.path.join(project_path, "bin", getArch()))
+
+def getArch():
+    result = ""
+    if os.environ['OS'].startswith("Windows"):
+        result = "windows_"
+    else:
+        result = "linux_"
+    if sublime.arch() == "x64":
+        result += "amd64"
+    else:
+        result += "386"
+    return result
 
 def getProject(filename=""):
 	if len(filename) == 0:
