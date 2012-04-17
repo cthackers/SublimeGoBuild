@@ -1,0 +1,5 @@
+{
+	"target": "go_build",
+    "type": "BUILD",
+	"selector": "source.go"
+}
