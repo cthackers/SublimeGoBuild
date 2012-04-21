@@ -42,11 +42,11 @@ class GoBuildCommand(sublime_plugin.WindowCommand):
 
 	def executeFile(self):
 		if self.type == "RUN":
-			command = "go run " + self.file_name
+			command = ["go", "run", self.file_name]
 		elif self.type == "BUILD":
-			command = "go build -x -v " + self.file_name
+			command = ["go", "build", "-x", "-v", self.file_name]
 		elif self.type == "TEST":
-			command = "go test " + self.file_name
+			command = ["go", "test", self.file_name]
 		else:
 			self.errorMessage("Unknown command: " + self.type)
 			self.restoreEnv()
@@ -55,7 +55,7 @@ class GoBuildCommand(sublime_plugin.WindowCommand):
 		getView().window().run_command("exec", { 'kill': True })
 		getView().window().run_command("exec", {
 			'shell': True,
-			'cmd': [command],
+			'cmd': command,
 			'working_dir' : os.path.dirname(self.file_name),
 			'file_regex': '^(.+\.go):([0-9]+):(?:([0-9]+):)?\s*(.*)',
 		})
