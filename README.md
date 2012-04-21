@@ -1,7 +1,6 @@
 # Go Build
 
-This is a little plugin I've built for myself to help me working with Sublime Text 2 on GO projects. 
-
+Sublime Go Build is a plugin for Sublime Text 2 that will help you create a Go project structure, and run/build/test your project from withing the editor.
 
 ## How to install
 
