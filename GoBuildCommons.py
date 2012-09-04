@@ -27,7 +27,7 @@ def createValidStructure(project_path):
 
 def getArch():
     result = ""
-    if os.environ['OS'].startswith("Windows"):
+    if "windows" in sublime.platform():
         result = "windows_"
     else:
         result = "linux_"
